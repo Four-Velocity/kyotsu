@@ -1,0 +1,162 @@
+site_name: Kyōtsū 共通
+site_description: THE module with common logic and use cases used as foundation for microservices
+site_url: https://kyotsu.four-velocity.com
+repo_url: https://github.com/Four-Velocity/kyotsu
+repo_name: github/kyotsu
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2024 Oleh Mazur
+watch: [mkdocs.yml, README.md, src/kyotsu, docs]
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  font:
+    text: Noto Sans
+    code: Noto Sans Mono
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: orange
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: orange
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - content.action.edit
+    - content.action.view
+#    - content.tabs.link
+#    - content.tooltips
+#    - content.code.annotate
+#    - content.code.copy
+#    - content.code.select
+#    - toc.permalink
+  logo: overrides/assets/images/logo.png
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+    tag:
+      default: octicons/hash-24
+      api_reference: octicons/code-square-24
+      base: octicons/diamond-24
+      configuration: octicons/gear-24
+      databases: octicons/database-24
+      external_services: octicons/link-24
+      types: material/tag-plus
+
+plugins:
+- search
+- social:
+    cards_layout_options:
+      font_family: Noto Sans
+      background_color: orange
+- tags:
+#    tags_file: about/tags.md
+- mkdocstrings:
+    handlers:
+      python:
+        path: [kyotsu]
+        import:
+        - https://docs.pydantic.dev/latest/objects.inv
+        - https://docs.python.org/3/objects.inv
+        load_external_modules: true
+        preload_modules:
+          - pydantic
+          - pydantic-settings
+        options:
+          # https://mkdocstrings.github.io/python/usage/configuration/general/
+          docstring_style: google
+          docstring_section_style: spacy
+          members_order: source
+          show_root_heading: true
+          show_root_toc_entry: true
+          show_root_full_path: true
+          show_symbol_type_heading: true
+          show_symbol_type_toc: true
+          allow_inspection: true
+          show_source: true
+          unwrap_annotated: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+
+extra:
+  generator: false
+  tags:
+    API Reference: api_reference
+    Base: base
+    Configuration: configuration
+    Databases: databases
+    External Services: external_services
+    Types: types
+
+extra_javascript:
+  - overrides/_js/external-nav-sidebar.js
+
+nav:
+  - "About":
+      - index.md
+      - Changelog: about/changelog.md
+      - Tags Index: about/tags.md
+  - Modules:
+      - modules/index.md
+      - Config:
+        - modules/config/index.md
+        - Base: modules/config/base.md
+        - Databases:
+          - Databases: modules/config/databases/index.md
+          - Inner Types: modules/config/databases/types.md
+        - Services: modules/config/services.md
+      - Logging:
+          - modules/logging/index.md
+          - Error Codes:
+              - Error Codes: modules/logging/error_codes/index.md
+              - Definitions List: modules/logging/error_codes/definitions.md
+  - Recipes: recipes/index.md
+  - Development:
+    - development/index.md

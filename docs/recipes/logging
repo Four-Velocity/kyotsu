@@ -1,0 +1,18 @@
+## Think more about structure
+
+# Describe structlog logging
+
+# describe telemetry locally
+    # describe basics
+    # describe exceptions
+    # describe error codes
+# describe telemetry between services
+
+# describe user errors
+    # describe exceptions
+    # describe error codes
+
+# describe how-to create new error codes
+
+# table with dev description
+# table with hp description
